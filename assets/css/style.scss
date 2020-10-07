@@ -1,0 +1,250 @@
+---
+---
+
+@import 'variables';
+
+body {
+  background: #fff;
+}
+
+$padding: 0.75rem 2rem;
+$radius: 8px;
+$shadow: 0 1px 4px rgba(#000, 0.06);
+
+// Page layout
+
+.form-jekyll-list {
+  @include contain-1090;
+  list-style: none;
+
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  a:visited {
+    background: $white;
+    color: $bright-blue;
+    text-decoration: none;
+    @include fs-title-3-mobile;
+    display: flex;
+    align-items: center;
+    border: 3px solid $bright-blue;
+    border-radius: $radius;
+    padding: 1rem 1.5rem;
+    max-width: 38rem;
+    margin-bottom: 1.5rem;
+  }
+
+  svg {
+    width: 3rem;
+    flex: none;
+    margin-right: 2.5rem;
+  }
+}
+
+.page-header {
+  border-bottom: 5px solid #4F66EE;
+  padding-bottom: 1.5rem;
+  margin: 2rem 0;
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+  }
+}
+
+// Conditional styles
+
+[data-group] {
+  display: none;
+
+  &.form-section.active {
+    display: none;
+  }
+}
+
+.is-conditionally-visible[data-group] {
+  display: block;
+
+  .all-pages &,
+  &.form-section.active {
+    display: block;
+  }
+}
+
+// Override .form-section styles so that the
+// "all-conditionals" setting doesn't break
+// the layout for conditionally hidden pages.
+
+.form-section {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+
+  &.active {
+    max-height: initial;
+    overflow: visible;
+  }
+}
+
+// Annotations
+
+.field-annotation {
+  display: none;
+  background: $yellow-1;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  box-shadow: 0 3px 0 $slate-blue;
+  border: 1px solid $slate-blue;
+  z-index: 20;
+  border-radius: 2px;
+
+  .radio &,
+  .checkbox & {
+    left: 8rem;
+    top: 0;
+  }
+
+  p {
+    margin: 0 0 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Form settings
+
+.form-settings,
+hypothesis-adder,
+.annotator-outer {
+  display: none;
+
+  .admin & {
+    display: block;
+  }
+}
+
+.form-settings {
+  $offset: 4.5rem;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  box-shadow: $shadow;
+  padding: $padding;
+  position: fixed;
+  bottom: $offset;
+  right: 0;
+  border-top-left-radius: $radius;
+  transform: translateY(100%);
+  will-change: transform;
+  transition: all 0.2s ease-out;
+
+  h5 {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-settings-toggle {
+    position: absolute;
+    z-index: 2;
+    top: 2rem;
+    right: 2rem;
+    left: 2rem;
+    text-align: right;
+    opacity: 0.5;
+
+    img {
+      transform: rotate(180deg);
+      transform-origin: 50% 50%;
+      transition: all 0.1s ease-out;
+      will-change: transform;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+
+  &.active {
+    transform: translateY($offset);
+
+    .form-settings-toggle img {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+// Settings body classes
+
+.all-pages {
+  background: $grey-4;
+
+  .sections-container {
+    max-width: 100%;
+  }
+
+  .hero-banner {
+    padding-top: 0;
+  }
+
+  .pagination,
+  .sfgov-alpha-banner,
+  header[role="banner"],
+  .sfgov-footer {
+    display: none;
+  }
+
+  .form-section {
+    max-height: initial;
+    overflow: visible;
+    border-radius: $radius;
+    background: #fff;
+    box-shadow: $shadow;
+    padding: $padding;
+    margin: 0.5rem 0.5rem 1.5rem;
+  }
+
+  div[data-group] {
+    display: none;
+  }
+}
+
+.all-conditionals {
+  div[data-group] {
+    display: block;
+  }
+}
+
+.all-annotations {
+  .form-group,
+  .field-address {
+    position: relative;
+  }
+  .field-annotation {
+    display: block;
+  }
+}
+
+.show-hidden div[data-hidden] {
+  position: static;
+  width: inherit;
+  height: inherit;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: unset;
+  white-space: inherit;
+  border: inherit;
+}
+
+.nav-on-top {
+  display: none;
+  .top-nav & {
+    display: block;
+  }
+}
